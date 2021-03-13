@@ -60,6 +60,6 @@ mvn package
 ## 在pipeline中使用
 
 ```
-qyWechatNotification failNotify: true, mentionedId: 'ALL', mentionedMobile: '',projectName: "${BUILD_TAG}", webhookUrl: 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=12e055f8-c40b-4d51-a138-fc6e164b33b8'
+qyWechatNotification failNotify: true, mentionedId: 'ALL', mentionedMobile: '',projectName: "${BUILD_TAG}", webhookUrl: 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=12e055f8-c40b-4d51-a138-xxxxxxxxxx'
 
 ```
