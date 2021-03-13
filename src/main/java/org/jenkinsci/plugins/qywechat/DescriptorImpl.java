@@ -39,6 +39,11 @@ public class DescriptorImpl extends BuildStepDescriptor<Publisher> {
         config.webhookUrl = webhookUrl;
     }
 
+    public String getProjectName() { return config.projectName; }
+
+    public void setProjectName(String projectName) { config.projectName = projectName;
+    }
+
     public String getTopicName() {
         return config.topicName;
     }
@@ -119,6 +124,7 @@ public class DescriptorImpl extends BuildStepDescriptor<Publisher> {
         NotificationConfig unsaveConfig = new NotificationConfig();
 
         unsaveConfig.webhookUrl = config.webhookUrl;
+        unsaveConfig.projectName = config.projectName;
         unsaveConfig.mentionedId = config.mentionedId;
         unsaveConfig.mentionedMobile = config.mentionedMobile;
         unsaveConfig.topicName = config.topicName;
@@ -171,6 +177,7 @@ public class DescriptorImpl extends BuildStepDescriptor<Publisher> {
     @Override
     public boolean configure(StaplerRequest req, JSONObject json) throws FormException {
         config.webhookUrl = json.getString("webhookUrl");
+        config.projectName = json.getString("projectName");
         config.topicName = json.getString("topicName");
         config.mentionedId = json.getString("mentionedId");
         config.mentionedMobile = json.getString("mentionedMobile");

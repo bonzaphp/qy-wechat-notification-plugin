@@ -9,6 +9,10 @@ import hudson.util.Secret;
 public class NotificationConfig {
 
     /**
+     * 通知的默认项目名称
+     */
+    public String projectName = "pipeline";
+    /**
      * 企业微信WebHook地址
      */
     public String webhookUrl = "";

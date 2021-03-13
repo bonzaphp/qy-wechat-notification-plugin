@@ -63,7 +63,7 @@ public class QyWechatNotification extends Publisher implements SimpleBuildStep {
             return true;
         }
         this.projectName = build.getProject().getFullDisplayName();
-        BuildBeginInfo buildInfo = new BuildBeginInfo(this.projectName, build, config);
+        BuildBeginInfo buildInfo = new BuildBeginInfo(config.projectName, build, config);
 
         String req = buildInfo.toJSONString();
         listener.getLogger().println("推送通知" + req);
@@ -96,7 +96,7 @@ public class QyWechatNotification extends Publisher implements SimpleBuildStep {
         }
 
         //构建结束通知
-        BuildOverInfo buildInfo = new BuildOverInfo(this.projectName, run, config);
+        BuildOverInfo buildInfo = new BuildOverInfo(config.projectName, run, config);
 
         String req = buildInfo.toJSONString();
         listener.getLogger().println("推送通知" + req);
@@ -167,6 +167,9 @@ public class QyWechatNotification extends Publisher implements SimpleBuildStep {
         if(StringUtils.isNotEmpty(webhookUrl)){
             config.webhookUrl = webhookUrl;
         }
+        if(StringUtils.isNotEmpty(projectName)){
+            config.projectName = projectName;
+        }
         if(StringUtils.isNotEmpty(mentionedId)){
             config.mentionedId = mentionedId;
         }
@@ -178,6 +181,10 @@ public class QyWechatNotification extends Publisher implements SimpleBuildStep {
         if(config.webhookUrl.contains("$")){
             String val = NotificationUtil.replaceMultipleEnvValue(config.webhookUrl, envVars);
             config.webhookUrl = val;
+        }
+        if(config.projectName.contains("$")){
+            String val = NotificationUtil.replaceMultipleEnvValue(config.projectName, envVars);
+            config.projectName = val;
         }
         if(config.mentionedId.contains("$")){
             String val = NotificationUtil.replaceMultipleEnvValue(config.mentionedId, envVars);
@@ -198,6 +205,9 @@ public class QyWechatNotification extends Publisher implements SimpleBuildStep {
     }
 
     @DataBoundSetter
+    public void setProjectName(String projectName) { this.projectName = projectName; }
+
+    @DataBoundSetter
     public void setMentionedId(String mentionedId) {
         this.mentionedId = mentionedId;
     }
@@ -215,6 +225,8 @@ public class QyWechatNotification extends Publisher implements SimpleBuildStep {
     public String getWebhookUrl() {
         return webhookUrl;
     }
+
+    public String getProjectName() { return projectName; }
 
     public String getMentionedId() {
         return mentionedId;
